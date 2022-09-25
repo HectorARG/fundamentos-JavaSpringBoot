@@ -1,2 +1,5 @@
-package com.fundamentos.springboot.fundamentos.been;public interface MyBeanWhitPrperties {
+package com.fundamentos.springboot.fundamentos.been;
+
+public interface MyBeanWhitPrperties {
+    String function();
 }
