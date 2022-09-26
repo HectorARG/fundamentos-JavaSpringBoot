@@ -4,6 +4,8 @@ import com.fundamentos.springboot.fundamentos.been.MyBean;
 import com.fundamentos.springboot.fundamentos.been.MyBeanWhitPrperties;
 import com.fundamentos.springboot.fundamentos.been.MyBeanWithDependency;
 import com.fundamentos.springboot.fundamentos.component.ComponentDependency;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +18,8 @@ public class FundamentosApplication implements CommandLineRunner {
 	private MyBean myBean;
 	private MyBeanWithDependency myBeanWithDependency;
 	private MyBeanWhitPrperties myBeanWhitPrperties;
+
+	private final Log LOGGER = LogFactory.getLog(FundamentosApplication.class);
 
 	public FundamentosApplication(
 			@Qualifier("componentTwoImplement") ComponentDependency componentDependency,
@@ -39,5 +43,8 @@ public class FundamentosApplication implements CommandLineRunner {
 		myBean.print();
 		myBeanWithDependency.printWithDependency();
 		System.out.println(myBeanWhitPrperties.function());
+		LOGGER.error("Esto es un error del log");
+		LOGGER.info("Mensaje informativo de informacion");
+		LOGGER.debug("Mensaje informativo debug");
 	}
 }
