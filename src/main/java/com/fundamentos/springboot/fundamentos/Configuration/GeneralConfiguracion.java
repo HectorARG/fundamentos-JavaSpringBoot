@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.sql.DataSource;
 
+@PropertySource("classpath:conection.propeties")
 @Configuration
 public class GeneralConfiguracion {
 
@@ -21,6 +23,18 @@ public class GeneralConfiguracion {
     @Value("${value.random}")
     private String random;
 
+    @Value("${jdbc.url}")
+    private String jdbcUrl;
+
+    @Value("${driver}")
+    private String driver;
+
+    @Value("${username}")
+    private String username;
+
+    @Value("${password}")
+    private String password;
+
     @Bean
     public MyBeanWhitPrperties funcion(){
         return  new MyBeanWhitPropirtiesImplement(name,apellido);
@@ -29,10 +43,10 @@ public class GeneralConfiguracion {
     @Bean
     public DataSource dataSource(){
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("org.h2.Driver");
-        dataSourceBuilder.url("jdbc:h2:mem:testdb");
-        dataSourceBuilder.username("sa");
-        dataSourceBuilder.password("");
+        dataSourceBuilder.driverClassName(this.driver);
+        dataSourceBuilder.url(this.jdbcUrl);
+        dataSourceBuilder.username(this.username);
+        dataSourceBuilder.password(this.password);
         return dataSourceBuilder.build();
     }
 }
